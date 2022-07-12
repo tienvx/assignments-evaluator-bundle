@@ -11,6 +11,7 @@ use Tienvx\Bundle\AssignmentsEvaluatorBundle\Validator\AssignmentsSyntaxValidato
 
 /**
  * @covers \Tienvx\Bundle\AssignmentsEvaluatorBundle\Validator\AssignmentsSyntax
+ * @phpcs:disable PSR1.Classes.ClassDeclaration.MultipleClasses
  */
 class ExpressionSyntaxTest extends TestCase
 {

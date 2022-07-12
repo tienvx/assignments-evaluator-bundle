@@ -21,7 +21,7 @@ class AssignmentsSyntaxValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate(mixed $expression, Constraint $constraint): void
+    public function validate($expression, Constraint $constraint): void
     {
         if (!$constraint instanceof AssignmentsSyntax) {
             throw new UnexpectedTypeException($constraint, AssignmentsSyntax::class);
