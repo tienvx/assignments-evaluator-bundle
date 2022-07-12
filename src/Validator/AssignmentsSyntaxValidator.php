@@ -2,6 +2,7 @@
 
 namespace Tienvx\Bundle\AssignmentsEvaluatorBundle\Validator;
 
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -11,11 +12,11 @@ use Tienvx\AssignmentsEvaluator\SyntaxError;
 
 class AssignmentsSyntaxValidator extends ConstraintValidator
 {
-    private AssignmentsEvaluator $assignmentsEvaluator;
+    private ?AssignmentsEvaluator $assignmentsEvaluator;
 
-    public function __construct(AssignmentsEvaluator $assignmentsEvaluator)
+    public function __construct(AssignmentsEvaluator $assignmentsEvaluator = null)
     {
-        $this->assignmentsEvaluator = $assignmentsEvaluator;
+        $this->assignmentsEvaluator = $assignmentsEvaluator ?? new AssignmentsEvaluator(new ExpressionLanguage());
     }
 
     /**
