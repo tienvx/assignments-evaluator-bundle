@@ -3,6 +3,9 @@
 namespace Tienvx\Bundle\AssignmentsEvaluatorBundle\Tests\Validator;
 
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 use Tienvx\AssignmentsEvaluator\AssignmentsEvaluator;
 use Tienvx\Bundle\AssignmentsEvaluatorBundle\Validator\AssignmentsSyntax;
@@ -18,6 +21,26 @@ class AssignmentsSyntaxValidatorTest extends ConstraintValidatorTestCase
     protected function createValidator()
     {
         return new AssignmentsSyntaxValidator(new AssignmentsEvaluator(new ExpressionLanguage()));
+    }
+
+    public function testInvalidTypeException()
+    {
+        $this->expectException(UnexpectedTypeException::class);
+        $this->expectExceptionMessage(
+            'Expected argument of type "' .
+            AssignmentsSyntax::class .
+            '", "' .
+            Email::class .
+            '" given'
+        );
+        $this->validator->validate('sum = 1 + 1', new Email());
+    }
+
+    public function testInvalidValueException()
+    {
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage('Expected argument of type "string", "array" given');
+        $this->validator->validate(['sum', '=', '1 + 1'], new AssignmentsSyntax());
     }
 
     public function testNullIsValid()
