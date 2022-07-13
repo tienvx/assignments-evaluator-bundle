@@ -7,7 +7,8 @@
         "tienvx/assignments-evaluator": "^1.0.1",
         "symfony/http-kernel": "^5.4|^6.0",
         "symfony/validator": "^5.4|^6.0",
-        "symfony/dependency-injection": "^5.4|^6.0"
+        "symfony/dependency-injection": "^5.4|^6.0",
+        "symfony/config": "^5.4|^6.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
