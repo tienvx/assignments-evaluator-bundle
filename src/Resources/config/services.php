@@ -9,9 +9,10 @@ use Tienvx\Bundle\AssignmentsEvaluatorBundle\Validator\AssignmentsSyntaxValidato
 
 return static function (ContainerConfigurator $container): void {
     $container->services()
+        ->set('assignments_evaluator.expression_language', ExpressionLanguage::class)
         ->set(AssignmentsEvaluator::class)
             ->args([
-                service(ExpressionLanguage::class),
+                service('assignments_evaluator.expression_language'),
             ])
 
         ->set(AssignmentsSyntax::class)
