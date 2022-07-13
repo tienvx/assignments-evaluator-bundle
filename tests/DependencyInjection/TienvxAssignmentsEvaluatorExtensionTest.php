@@ -26,9 +26,22 @@ class TienvxMbtExtensionTest extends TestCase
     public function testLoad(): void
     {
         $this->loader->load([], $this->container);
+        $this->assertTrue($this->container->has('assignments_evaluator.expression_language'));
         $this->assertTrue($this->container->has(AssignmentsEvaluator::class));
+        $this->assertEquals(
+            'assignments_evaluator.expression_language',
+            $this->container
+                ->getDefinition(AssignmentsEvaluator::class)
+                ->getArgument(0)
+        );
         $this->assertTrue($this->container->has(AssignmentsSyntax::class));
         $this->assertTrue($this->container->has(AssignmentsSyntaxValidator::class));
+        $this->assertEquals(
+            AssignmentsEvaluator::class,
+            $this->container
+                ->getDefinition(AssignmentsSyntaxValidator::class)
+                ->getArgument(0)
+        );
         $this->assertTrue(
             $this->container
                 ->getDefinition(AssignmentsSyntaxValidator::class)
